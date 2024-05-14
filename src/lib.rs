@@ -1,7 +1,7 @@
-use std::collections::HashMap;
-use cxsign::{Location, LocationPreprocessorTrait};
+use cxsign_types::{Location, LocationPreprocessorTrait};
 use lazy_static::lazy_static;
 use serde::Deserialize;
+use std::collections::HashMap;
 
 #[derive(Deserialize)]
 struct LocationWithoutAlt {
@@ -12,7 +12,12 @@ struct LocationWithoutAlt {
 
 impl LocationWithoutAlt {
     fn to_location(&self, alt: &str) -> Location {
-        Location::new(&self.address, &format!("{:.6}", self.longitude), &format!("{:.6}", self.latitude), alt)
+        Location::new(
+            &self.address,
+            &format!("{:.6}", self.longitude),
+            &format!("{:.6}", self.latitude),
+            alt,
+        )
     }
 }
 
@@ -137,12 +142,16 @@ static LOCATIONS_JSON: &str = r#"
 }
 "#;
 lazy_static! {
-    static ref LOCATIONS_WITHOUT_ALT: HashMap< String, LocationWithoutAlt >
-		= serde_json::from_str(LOCATIONS_JSON).unwrap();
-    pub static ref ADDRS: HashMap< String, String >
-		= LOCATIONS_WITHOUT_ALT.iter().map(|(k,v)|(k.clone(),v.address.clone())).collect();
-    pub static ref LOCATIONS: HashMap< String, Location >
-		= LOCATIONS_WITHOUT_ALT.iter().map(|(k,v)|(k.clone(),v.to_location("1108"))).collect();
+    static ref LOCATIONS_WITHOUT_ALT: HashMap<String, LocationWithoutAlt> =
+        serde_json::from_str(LOCATIONS_JSON).unwrap();
+    pub static ref ADDRS: HashMap<String, String> = LOCATIONS_WITHOUT_ALT
+        .iter()
+        .map(|(k, v)| (k.clone(), v.address.clone()))
+        .collect();
+    pub static ref LOCATIONS: HashMap<String, Location> = LOCATIONS_WITHOUT_ALT
+        .iter()
+        .map(|(k, v)| (k.clone(), v.to_location("1108")))
+        .collect();
 }
 pub struct LocationPreprocessor;
 
