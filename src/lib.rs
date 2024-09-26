@@ -138,7 +138,17 @@ static LOCATIONS_JSON: &str = r#"
 		"latitude": 34.132006,
 		"longitude": 108.842118,
 		"address": "西安市长安区兴隆街道内环北路西安电子科技大学(南校区)"
-	}
+	},
+	"西大楼": {
+		"latitude": 34.240976,
+		"longitude": 108.923468,
+		"address": "西安市碑林区张家村街道二环南路西段辅路西安电子科技大学"
+	},
+	"阶梯教室楼": {
+		"latitude": 34.238268,
+		"longitude": 108.926841,
+		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
+	},
 }
 "#;
 lazy_static! {
