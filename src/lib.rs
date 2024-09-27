@@ -148,7 +148,7 @@ static LOCATIONS_JSON: &str = r#"
 		"latitude": 34.238268,
 		"longitude": 108.926841,
 		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
-	},
+	}
 }
 "#;
 lazy_static! {
