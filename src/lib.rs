@@ -1,4 +1,4 @@
-use cxsign_types::{Location, LocationPreprocessorTrait};
+use cxlib_types::{Location, LocationPreprocessorTrait};
 use lazy_static::lazy_static;
 use serde::Deserialize;
 use std::collections::HashMap;
