@@ -21,9 +21,8 @@ impl LocationWithoutAlt {
     }
 }
 
-/// See [here](https://github.com/Pairman/Xdcheckin/blob/main/src/xdcheckin/core/locations.py).
-static LOCATIONS_JSON: &str = r#"
-{
+/// See [here](https://github.com/Pairman/Xdcheckin/blob/main/src/xdcheckin/server/static/g_locations.js).
+static LOCATIONS_JSON: &str = r#" {
 	"A楼": {
 		"latitude": 34.133171,
 		"longitude": 108.837420,
@@ -142,11 +141,36 @@ static LOCATIONS_JSON: &str = r#"
 	"西大楼": {
 		"latitude": 34.240976,
 		"longitude": 108.923468,
-		"address": "西安市碑林区张家村街道二环南路西段辅路西安电子科技大学"
+		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
 	},
-	"阶梯教室楼": {
+	"阶梯楼": {
 		"latitude": 34.238268,
 		"longitude": 108.926841,
+		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
+	},
+	"北校区体育馆": {
+		"latitude": 34.232305,
+		"longitude": 108.915958,
+		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
+	},
+	"北校区室外篮球场": {
+		"latitude": 34.232459,
+		"longitude": 108.917250,
+		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
+	},
+	"北校区操场": {
+		"latitude": 34.231810,
+		"longitude": 108.918339,
+		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
+	},
+	"北校区图书馆": {
+		"latitude": 34.231394,
+		"longitude": 108.916595,
+		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
+	},
+	"北校区会议中心": {
+		"latitude": 34.230493,
+		"longitude": 108.917517,
 		"address": "西安市雁塔区电子城街道电子大道北段西安电子科技大学"
 	}
 }
@@ -167,7 +191,8 @@ pub struct LocationPreprocessor;
 
 impl LocationPreprocessorTrait for LocationPreprocessor {
     fn do_preprocess(&self, location: Location) -> Location {
-        let [mut addr, lon, lat, alt] = location.to_owned_fields();
+        let [mut addr, lon, lat, alt] = location.into_owned_fields();
+        // TODO: 后续应更改为获取最近的那个位置的 addr.
         for (k, v) in ADDRS.iter() {
             if addr.starts_with(k.trim_matches('楼')) {
                 addr = v.to_string();
