@@ -6,7 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cxlib_types = { git = "https://github.com/worksoup/cxlib.git" }
-lazy_static = "1.4"
-serde = { version = "1.0", features = ["default"] }
-serde_json = "1.0"
+static_read_only_table = { git = "https://github.com/worksoup/static_read_only_table.git" }
+cxlib_types = { git = "https://github.com/worksoup/cxlib.git", branch = "explict-global-var" }
